@@ -15,6 +15,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
+import com.dhc.gallery.components.AnimatedFileDrawable;
 import com.dhc.gallery.tl.FileLocation;
 import com.dhc.gallery.tl.TLObject;
 import com.dhc.gallery.utils.ImageLoader;

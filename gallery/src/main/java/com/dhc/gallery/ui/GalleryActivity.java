@@ -1,5 +1,5 @@
 
-package com.dhc.gallery;
+package com.dhc.gallery.ui;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -13,8 +13,13 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.widget.FrameLayout;
 
+import com.dhc.gallery.CameraActivity;
+import com.dhc.gallery.GalleryConfig;
+import com.dhc.gallery.PhotoViewer;
+import com.dhc.gallery.R;
 import com.dhc.gallery.actionbar.ActionBarLayout;
 import com.dhc.gallery.actionbar.BaseFragment;
+import com.dhc.gallery.utils.Gallery;
 import com.dhc.gallery.utils.ImageLoader;
 
 import java.io.BufferedOutputStream;

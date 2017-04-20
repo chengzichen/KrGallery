@@ -1,5 +1,5 @@
 
-package com.dhc.gallery;
+package com.dhc.gallery.ui;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,6 +18,11 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.dhc.gallery.BaseFragmentAdapter;
+import com.dhc.gallery.utils.Gallery;
+import com.dhc.gallery.PhotoViewer;
+import com.dhc.gallery.R;
+import com.dhc.gallery.Theme;
 import com.dhc.gallery.actionbar.ActionBar;
 import com.dhc.gallery.actionbar.ActionBarMenuItem;
 import com.dhc.gallery.actionbar.BaseFragment;

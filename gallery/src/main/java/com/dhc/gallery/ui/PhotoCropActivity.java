@@ -6,7 +6,7 @@
  * Copyright Nikolai Kudashov, 2013-2017.
  */
 
-package com.dhc.gallery;
+package com.dhc.gallery.ui;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -19,6 +19,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.dhc.gallery.R;
+import com.dhc.gallery.Theme;
 import com.dhc.gallery.actionbar.ActionBar;
 import com.dhc.gallery.actionbar.ActionBarMenu;
 import com.dhc.gallery.actionbar.BaseFragment;

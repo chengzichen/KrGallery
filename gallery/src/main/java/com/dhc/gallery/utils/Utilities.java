@@ -3,8 +3,6 @@ package com.dhc.gallery.utils;
 
 import android.graphics.Bitmap;
 
-import com.dhc.gallery.DispatchQueue;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.math.BigInteger;

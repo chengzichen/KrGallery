@@ -3,7 +3,7 @@ package com.dhc.gallery.utils;
 import com.dhc.gallery.tl.Document;
 import com.dhc.gallery.tl.FileLocation;
 import com.dhc.gallery.tl.InputFileLocation;
-import com.dhc.gallery.tl.TL_upload_file;
+import com.dhc.gallery.tl.TLUploadFile;
 
 import java.io.File;
 import java.io.RandomAccessFile;
@@ -14,7 +14,7 @@ public class FileLoadOperation {
     private static class RequestInfo {
         private int requestToken;
         private int offset;
-        private TL_upload_file response;
+        private TLUploadFile response;
     }
 
     private final static int stateIdle = 0;

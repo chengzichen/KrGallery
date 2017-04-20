@@ -42,6 +42,7 @@ import android.widget.Scroller;
 import com.dhc.gallery.actionbar.ActionBar;
 import com.dhc.gallery.actionbar.ActionBarMenu;
 import com.dhc.gallery.actionbar.BaseFragment;
+import com.dhc.gallery.components.AnimatedFileDrawable;
 import com.dhc.gallery.components.AspectRatioFrameLayout;
 import com.dhc.gallery.components.CheckBox;
 import com.dhc.gallery.components.ClippingImageView;
@@ -54,6 +55,7 @@ import com.dhc.gallery.tl.Photo;
 import com.dhc.gallery.tl.PhotoSize;
 import com.dhc.gallery.utils.AndroidUtilities;
 import com.dhc.gallery.utils.FileLoader;
+import com.dhc.gallery.utils.Gallery;
 import com.dhc.gallery.utils.ImageLoader;
 import com.dhc.gallery.utils.LayoutHelper;
 import com.dhc.gallery.utils.MediaController;
@@ -65,8 +67,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static com.dhc.gallery.PhotoAlbumPickerActivity.limitPickPhoto;
-import static com.dhc.gallery.PhotoAlbumPickerActivity.sHintOfPick;
+import static com.dhc.gallery.ui.PhotoAlbumPickerActivity.limitPickPhoto;
+import static com.dhc.gallery.ui.PhotoAlbumPickerActivity.sHintOfPick;
 
 @SuppressWarnings("unchecked")
 public class PhotoViewer implements NotificationCenter.NotificationCenterDelegate,

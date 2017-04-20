@@ -472,21 +472,19 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
 
     private BaseDialog getDialog(Context context, String msg, final PhotoViewer.EmptyPhotoViewerProvider emptyPhotoViewerProvider) {
         BaseDialog baseDialog = new BaseDialog(context)
-                .setCustomerContent(R.layout.layout_test_layout_dialog)
-                .setDialogSize(145.0f, 145.0f)
-                .setWindowBackground(R.color.clr_000000)
-                .setViewOnClickListener(R.id.easy_dialog_negative_btn, new View.OnClickListener() {
+                .setCustomerContent(R.layout.dialog_layout)
+                .setViewOnClickListener(R.id.dialog_cancel, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
                         emptyPhotoViewerProvider.cancelButtonPressed();
                     }
-                }).setViewOnClickListener(R.id.easy_dialog_positive_btn, new View.OnClickListener() {
+                }).setViewOnClickListener(R.id.dialog_sure, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         emptyPhotoViewerProvider.sendButtonPressed(0);
                     }
-                }).setText(R.id.easy_dialog_tv, msg);
+                }).setText(R.id.dialog_text, msg);
 
         baseDialog.setCancelable(false);//设置触摸外界可以取消
         return baseDialog;

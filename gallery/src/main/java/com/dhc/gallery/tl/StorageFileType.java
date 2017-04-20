@@ -1,11 +1,11 @@
 
 package com.dhc.gallery.tl;
 
-public class storage_FileType extends TLObject {
+public class StorageFileType extends TLObject {
 
-    public static storage_FileType TLdeserialize(AbstractSerializedData stream, int constructor,
-            boolean exception) {
-        storage_FileType result = null;
+    public static StorageFileType TLdeserialize(AbstractSerializedData stream, int constructor,
+												boolean exception) {
+        StorageFileType result = null;
         switch (constructor) {
             case 0xaa963b05:
                 result = new TL_storage_fileUnknown();
@@ -40,7 +40,7 @@ public class storage_FileType extends TLObject {
         }
         if (result == null && exception) {
             throw new RuntimeException(
-                    String.format("can't parse magic %x in storage_FileType", constructor));
+                    String.format("can't parse magic %x in StorageFileType", constructor));
         }
         if (result != null) {
             result.readParams(stream, exception);
@@ -48,7 +48,7 @@ public class storage_FileType extends TLObject {
         return result;
     }
 
-	public static class TL_storage_fileUnknown extends storage_FileType {
+	public static class TL_storage_fileUnknown extends StorageFileType {
 		public static int constructor = 0xaa963b05;
 
 
@@ -57,7 +57,7 @@ public class storage_FileType extends TLObject {
 		}
 	}
 
-	public static class TL_storage_fileMp4 extends storage_FileType {
+	public static class TL_storage_fileMp4 extends StorageFileType {
 		public static int constructor = 0xb3cea0e4;
 
 
@@ -66,7 +66,7 @@ public class storage_FileType extends TLObject {
 		}
 	}
 
-	public static class TL_storage_fileWebp extends storage_FileType {
+	public static class TL_storage_fileWebp extends StorageFileType {
 		public static int constructor = 0x1081464c;
 
 
@@ -75,7 +75,7 @@ public class storage_FileType extends TLObject {
 		}
 	}
 
-	public static class TL_storage_filePng extends storage_FileType {
+	public static class TL_storage_filePng extends StorageFileType {
 		public static int constructor = 0xa4f63c0;
 
 
@@ -84,7 +84,7 @@ public class storage_FileType extends TLObject {
 		}
 	}
 
-	public static class TL_storage_fileGif extends storage_FileType {
+	public static class TL_storage_fileGif extends StorageFileType {
 		public static int constructor = 0xcae1aadf;
 
 
@@ -93,7 +93,7 @@ public class storage_FileType extends TLObject {
 		}
 	}
 
-	public static class TL_storage_filePdf extends storage_FileType {
+	public static class TL_storage_filePdf extends StorageFileType {
 		public static int constructor = 0xae1e508d;
 
 
@@ -102,7 +102,7 @@ public class storage_FileType extends TLObject {
 		}
 	}
 
-	public static class TL_storage_fileMp3 extends storage_FileType {
+	public static class TL_storage_fileMp3 extends StorageFileType {
 		public static int constructor = 0x528a0677;
 
 
@@ -111,7 +111,7 @@ public class storage_FileType extends TLObject {
 		}
 	}
 
-	public static class TL_storage_fileJpeg extends storage_FileType {
+	public static class TL_storage_fileJpeg extends StorageFileType {
 		public static int constructor = 0x7efe0e;
 
 
@@ -120,7 +120,7 @@ public class storage_FileType extends TLObject {
 		}
 	}
 
-	public static class TL_storage_fileMov extends storage_FileType {
+	public static class TL_storage_fileMov extends StorageFileType {
 		public static int constructor = 0x4b09ebbc;
 
 
@@ -129,7 +129,7 @@ public class storage_FileType extends TLObject {
 		}
 	}
 
-	public static class TL_storage_filePartial extends storage_FileType {
+	public static class TL_storage_filePartial extends StorageFileType {
 		public static int constructor = 0x40bc6f52;
 
 

@@ -14,7 +14,7 @@
         android:supportsRtl="true">
 
         <activity
-            android:name="com.dhc.gallery.GalleryActivity"
+            android:name="com.dhc.gallery.ui.GalleryActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             ></activity>
     </application>

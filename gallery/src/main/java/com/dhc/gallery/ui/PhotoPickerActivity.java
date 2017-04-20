@@ -1,5 +1,5 @@
 
-package com.dhc.gallery;
+package com.dhc.gallery.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,6 +23,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.dhc.gallery.BaseFragmentAdapter;
+import com.dhc.gallery.utils.Gallery;
+import com.dhc.gallery.PhotoViewer;
+import com.dhc.gallery.R;
+import com.dhc.gallery.Theme;
 import com.dhc.gallery.actionbar.ActionBar;
 import com.dhc.gallery.actionbar.ActionBarMenu;
 import com.dhc.gallery.actionbar.ActionBarMenuItem;
@@ -40,8 +45,8 @@ import com.dhc.gallery.utils.NotificationCenter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static com.dhc.gallery.PhotoAlbumPickerActivity.DarkTheme;
-import static com.dhc.gallery.PhotoAlbumPickerActivity.sHintOfPick;
+import static com.dhc.gallery.ui.PhotoAlbumPickerActivity.DarkTheme;
+import static com.dhc.gallery.ui.PhotoAlbumPickerActivity.sHintOfPick;
 
 public class PhotoPickerActivity extends BaseFragment
         implements NotificationCenter.NotificationCenterDelegate, PhotoViewer.PhotoViewerProvider {

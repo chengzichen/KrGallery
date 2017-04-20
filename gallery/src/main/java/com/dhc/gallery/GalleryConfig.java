@@ -4,6 +4,8 @@ package com.dhc.gallery;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.dhc.gallery.ui.GalleryActivity;
+
 /**
  * the {@link GalleryActivity} of buidler.
  */

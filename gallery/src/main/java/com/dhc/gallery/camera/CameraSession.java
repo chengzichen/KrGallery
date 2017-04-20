@@ -21,7 +21,7 @@ import android.view.Surface;
 import android.view.WindowManager;
 
 
-import com.dhc.gallery.Gallery;
+import com.dhc.gallery.utils.Gallery;
 
 import java.util.ArrayList;
 

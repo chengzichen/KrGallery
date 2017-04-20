@@ -12,13 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.0"
-        android:background="@drawable/shape_kairu_library_dialog_base"/>
+        />
 
     <FrameLayout
         android:id="@+id/fl_btn_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_dialog_base_bottom"/>
+        />
    <!-- 此处的imageview  可以根据实际情况自定义-->
     <ImageView
         android:id="@+id/iv_close"

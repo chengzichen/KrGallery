@@ -6,6 +6,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.widget.Toast;
 
+import com.dhc.gallery.ui.GalleryActivity;
+
 import static android.os.Environment.MEDIA_MOUNTED;
 
 

@@ -19,7 +19,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.SparseArray;
 
-import com.dhc.gallery.Gallery;
 import com.dhc.gallery.R;
 import com.dhc.gallery.tl.Document;
 

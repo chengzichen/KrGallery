@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -38,13 +39,16 @@ public class BaseDialog extends Dialog implements View.OnClickListener,DialogInt
     private ImageView closeIV;
 
     public BaseDialog(Context context) {
-        super(context, R.style.Dialog_Fullscreen);
+        super(context, R.style.dialog_custom);
         mContext = context;
         handler = new Handler(context.getMainLooper());
         initView();
     }
 
     private void initView() {
+        Window window = getWindow();
+        window.setGravity(Gravity.CENTER); // 此处可以设置dialog显示的位置为居中
+        window.setWindowAnimations(R.style.bottom_menu_animation); // 添加动画效果
         View child = getLayoutInflater().inflate(R.layout.layout_dialog_base, null, false);
         setContentView(child);
         mContainer = (FrameLayout) findViewById(R.id.fl_container);

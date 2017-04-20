@@ -9,7 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.dhc.gallery.PhotoAlbumPickerActivity;
+import com.dhc.gallery.ui.PhotoAlbumPickerActivity;
 import com.dhc.gallery.R;
 import com.dhc.gallery.Theme;
 import com.dhc.gallery.utils.AndroidUtilities;

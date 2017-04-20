@@ -15,11 +15,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 
-import com.dhc.gallery.AnimatedFileDrawable;
-import com.dhc.gallery.DispatchQueue;
-import com.dhc.gallery.Gallery;
+import com.dhc.gallery.components.AnimatedFileDrawable;
 import com.dhc.gallery.ImageReceiver;
-import com.dhc.gallery.LruCache;
 import com.dhc.gallery.tl.Document;
 import com.dhc.gallery.tl.FileLocation;
 import com.dhc.gallery.tl.PhotoSize;

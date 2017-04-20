@@ -1,6 +1,5 @@
 package com.dhc.gallery.utils;
 
-import com.dhc.gallery.DispatchQueue;
 import com.dhc.gallery.tl.Document;
 import com.dhc.gallery.tl.DocumentAttribute;
 import com.dhc.gallery.tl.FileLocation;

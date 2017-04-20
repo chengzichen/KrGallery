@@ -13,7 +13,7 @@ import com.dhc.gallery.R;
 import com.dhc.gallery.utils.AndroidUtilities;
 import com.dhc.gallery.utils.LayoutHelper;
 
-import static com.dhc.gallery.PhotoAlbumPickerActivity.DarkTheme;
+import static com.dhc.gallery.ui.PhotoAlbumPickerActivity.DarkTheme;
 
 public class PhotoPickerPhotoCell extends FrameLayout {
 

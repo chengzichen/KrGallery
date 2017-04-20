@@ -1,5 +1,5 @@
 
-package com.dhc.gallery;
+package com.dhc.gallery.utils;
 
 import android.app.Application;
 import android.os.Handler;

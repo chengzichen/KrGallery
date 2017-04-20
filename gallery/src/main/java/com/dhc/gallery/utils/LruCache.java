@@ -1,4 +1,4 @@
-package com.dhc.gallery;
+package com.dhc.gallery.utils;
 
 import android.graphics.drawable.BitmapDrawable;
 

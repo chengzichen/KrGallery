@@ -36,7 +36,6 @@ import android.widget.EdgeEffect;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.dhc.gallery.Gallery;
 import com.dhc.gallery.R;
 
 import java.io.File;
@@ -49,7 +48,7 @@ import java.util.Hashtable;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import static com.dhc.gallery.Gallery.applicationContext;
+import static com.dhc.gallery.utils.Gallery.applicationContext;
 
 public class AndroidUtilities {
 

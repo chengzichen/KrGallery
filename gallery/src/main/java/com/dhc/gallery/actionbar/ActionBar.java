@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dhc.gallery.AnimatorListenerAdapterProxy;
-import com.dhc.gallery.Gallery;
+import com.dhc.gallery.utils.Gallery;
 import com.dhc.gallery.Theme;
 import com.dhc.gallery.utils.AndroidUtilities;
 import com.dhc.gallery.utils.LayoutHelper;
