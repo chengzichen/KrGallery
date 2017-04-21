@@ -37,8 +37,8 @@ KrGallery摘取于[Telegram](https://github.com/DrKLO/Telegram "https://github.c
 ## 效果
 ![Markdown](http://i1.piimg.com/1949/51ab5a997a06871f.gif)
 ![Markdown](http://i1.piimg.com/1949/7527cd34a0dae34f.gif)
-![](http://i1.piimg.com/567571/713b0586e0c425ad.gif)
-![](http://i1.piimg.com/567571/0145b68eea8d18e9.gif)
+![Markdown](http://i1.piimg.com/567571/713b0586e0c425ad.gif)
+![Markdown](http://i1.piimg.com/567571/0145b68eea8d18e9.gif)
 
 ## 用途
 
