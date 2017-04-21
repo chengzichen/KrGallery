@@ -15,10 +15,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dhc.gallery.AnimatorListenerAdapterProxy;
-import com.dhc.gallery.utils.Gallery;
 import com.dhc.gallery.Theme;
+import com.dhc.gallery.proxy.AnimatorListenerAdapterProxy;
 import com.dhc.gallery.utils.AndroidUtilities;
+import com.dhc.gallery.utils.Gallery;
 import com.dhc.gallery.utils.LayoutHelper;
 
 import java.util.ArrayList;

@@ -8,7 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.dhc.gallery.ImageReceiver;
+import com.dhc.gallery.proxy.ImageReceiver;
 import com.dhc.gallery.tl.FileLocation;
 import com.dhc.gallery.tl.TLObject;
 

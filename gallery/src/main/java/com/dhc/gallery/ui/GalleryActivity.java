@@ -13,12 +13,11 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.widget.FrameLayout;
 
-import com.dhc.gallery.CameraActivity;
 import com.dhc.gallery.GalleryConfig;
-import com.dhc.gallery.PhotoViewer;
 import com.dhc.gallery.R;
 import com.dhc.gallery.actionbar.ActionBarLayout;
 import com.dhc.gallery.actionbar.BaseFragment;
+import com.dhc.gallery.proxy.PhotoViewer;
 import com.dhc.gallery.utils.Gallery;
 import com.dhc.gallery.utils.ImageLoader;
 
@@ -38,9 +37,7 @@ public class GalleryActivity extends Activity implements ActionBarLayout.ActionB
 
     public static final String PHOTOS = "PHOTOS";
     public static final String VIDEO = "VIDEOS";
-    public static final String BITMAP = "BITMAP";
-    public static final String CAMERA = "CAMERA";
-    public static final String CROP = "CROP";
+    public static final String DATA = "DATA";
 
     public static final String GALLERY_CONFIG = "GALLERY_CONFIG";
 
@@ -281,11 +278,13 @@ public class GalleryActivity extends Activity implements ActionBarLayout.ActionB
     public void didFinishEdit(Bitmap bitmap) {
         if (saveBitmap(bitmap, config.getFilePath(), true)) {
             Intent intent = new Intent();
-            intent.putExtra(CROP, config.getFilePath());
+            ArrayList<String> paths=new ArrayList<>();
+            paths.add(config.getFilePath());
+            intent.putExtra(PHOTOS, paths);
             setResult(Activity.RESULT_OK, intent);
         } else {
             Intent intent = new Intent();
-            intent.putExtra(CROP, getCroppedImage(bitmap));
+            intent.putExtra(DATA, getCroppedImage(bitmap));
             setResult(Activity.RESULT_OK, intent);
 
         }

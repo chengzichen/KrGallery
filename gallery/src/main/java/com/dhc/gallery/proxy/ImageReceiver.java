@@ -1,4 +1,4 @@
-package com.dhc.gallery;
+package com.dhc.gallery.proxy;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;

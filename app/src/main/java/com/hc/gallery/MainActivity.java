@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     case 0: /*** 选择单张图片 onActivityResult{@link GalleryActivity.PHOTOS}*/
                         GalleryHelper.with(MainActivity.this).type(GalleryConfig.SELECT_PHOTO).requestCode(12).singlePhoto().execute();
                         break;
-                    case 1:  /***选择单张图片并裁剪 onActivityResult{@link GalleryActivity.CROP}*/
+                    case 1:  /***选择单张图片并裁剪 onActivityResult{@link GalleryActivity.PHOTOS}*/
                         outputPath = StorageUtil.getWritePath(StorageUtil.get32UUID() + ".jpg", StorageType.TYPE_TEMP);
                         GalleryHelper.with(MainActivity.this).type(GalleryConfig.SELECT_PHOTO).requestCode(12).singlePhoto().isNeedCropWithPath(outputPath).execute();
                         break;
@@ -138,15 +138,11 @@ public class MainActivity extends AppCompatActivity {
                 String path = data.getStringExtra(GalleryActivity.VIDEO);
                 Toast.makeText(MainActivity.this, path.toString(), Toast.LENGTH_SHORT).show();
 
-            } else if (data.getStringExtra(GalleryActivity.CROP) != null) {//裁剪回来
+            } else if (data.getStringExtra(GalleryActivity.DATA) != null) {//裁剪回来
                 if (outputPath == null) {//没有传入返回裁剪路径
-
-                    byte[] datas = data.getByteArrayExtra(GalleryActivity.CROP);
+                    byte[] datas = data.getByteArrayExtra(GalleryActivity.DATA);
                     Toast.makeText(MainActivity.this, datas.toString(), Toast.LENGTH_SHORT).show();
 
-                } else {//传入返回裁剪路径
-                    String path = data.getStringExtra(GalleryActivity.CROP);
-                    Toast.makeText(MainActivity.this, path.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         }

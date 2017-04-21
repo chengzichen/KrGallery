@@ -1,5 +1,5 @@
 
-package com.dhc.gallery;
+package com.dhc.gallery.proxy;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -39,6 +39,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Scroller;
 
+import com.dhc.gallery.R;
+import com.dhc.gallery.Theme;
 import com.dhc.gallery.actionbar.ActionBar;
 import com.dhc.gallery.actionbar.ActionBarMenu;
 import com.dhc.gallery.actionbar.BaseFragment;
@@ -2241,6 +2243,8 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         centerImage.setImageBitmap((Bitmap) null);
         leftImage.setImageBitmap((Bitmap) null);
         rightImage.setImageBitmap((Bitmap) null);
+        if(containerView==null)
+            return;
         containerView.post(new Runnable() {
             @Override
             public void run() {

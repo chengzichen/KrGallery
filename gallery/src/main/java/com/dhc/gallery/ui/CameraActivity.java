@@ -1,4 +1,4 @@
-package com.dhc.gallery;
+package com.dhc.gallery.ui;
 
 import android.Manifest;
 import android.animation.Animator;
@@ -23,11 +23,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dhc.gallery.GalleryConfig;
+import com.dhc.gallery.R;
 import com.dhc.gallery.actionbar.BaseFragment;
 import com.dhc.gallery.actionbar.ShutterButton;
 import com.dhc.gallery.camera.CameraController;
 import com.dhc.gallery.camera.CameraView;
 import com.dhc.gallery.components.BaseDialog;
+import com.dhc.gallery.proxy.PhotoViewer;
 import com.dhc.gallery.utils.AndroidUtilities;
 import com.dhc.gallery.utils.LayoutHelper;
 import com.dhc.gallery.utils.MediaController;

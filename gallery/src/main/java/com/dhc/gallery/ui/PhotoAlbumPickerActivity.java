@@ -19,8 +19,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.dhc.gallery.BaseFragmentAdapter;
-import com.dhc.gallery.utils.Gallery;
-import com.dhc.gallery.PhotoViewer;
 import com.dhc.gallery.R;
 import com.dhc.gallery.Theme;
 import com.dhc.gallery.actionbar.ActionBar;
@@ -29,7 +27,9 @@ import com.dhc.gallery.actionbar.BaseFragment;
 import com.dhc.gallery.components.PhotoPickerAlbumsCell;
 import com.dhc.gallery.components.PhotoPickerSearchCell;
 import com.dhc.gallery.components.PickerBottomLayout;
+import com.dhc.gallery.proxy.PhotoViewer;
 import com.dhc.gallery.utils.AndroidUtilities;
+import com.dhc.gallery.utils.Gallery;
 import com.dhc.gallery.utils.LayoutHelper;
 import com.dhc.gallery.utils.MediaController;
 import com.dhc.gallery.utils.NotificationCenter;
@@ -108,6 +108,7 @@ public class PhotoAlbumPickerActivity extends BaseFragment
     @Override
     public void onFragmentDestroy() {
         NotificationCenter.getInstance().removeObserver(this, NotificationCenter.albumsDidLoaded);
+        MediaController.getInstance().cleanup();
         super.onFragmentDestroy();
     }
 

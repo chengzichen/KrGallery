@@ -111,7 +111,7 @@ public class MediaController implements NotificationCenter.NotificationCenterDel
         public CharSequence caption;
 
         public PhotoEntry(int bucketId, int imageId, long dateTaken, String path, int orientation,
-                boolean isVideo) {
+                          boolean isVideo) {
             this.bucketId = bucketId;
             this.imageId = imageId;
             this.dateTaken = dateTaken;
@@ -337,7 +337,7 @@ public class MediaController implements NotificationCenter.NotificationCenterDel
         });
 
         if (Build.VERSION.SDK_INT >= 16) {
-            mediaProjections = new String[] {
+            mediaProjections = new String[]{
                     MediaStore.Images.ImageColumns.DATA,
                     MediaStore.Images.ImageColumns.DISPLAY_NAME,
                     MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME,
@@ -347,7 +347,7 @@ public class MediaController implements NotificationCenter.NotificationCenterDel
                     MediaStore.Images.ImageColumns.HEIGHT
             };
         } else {
-            mediaProjections = new String[] {
+            mediaProjections = new String[]{
                     MediaStore.Images.ImageColumns.DATA,
                     MediaStore.Images.ImageColumns.DISPLAY_NAME,
                     MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME,
@@ -597,7 +597,7 @@ public class MediaController implements NotificationCenter.NotificationCenterDel
 
                             if (allPhotosAlbum == null) {
                                 allPhotosAlbum = new AlbumEntry(0, Gallery.applicationContext.getString(
-                                       R.string.AllPhotos), photoEntry, false);
+                                        R.string.AllPhotos), photoEntry, false);
                                 albumsSorted.add(0, allPhotosAlbum);
                             }
                             if (allPhotosAlbum != null) {

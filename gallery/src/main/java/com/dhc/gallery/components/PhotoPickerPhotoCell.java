@@ -8,8 +8,8 @@ import android.content.Context;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 
-import com.dhc.gallery.AnimatorListenerAdapterProxy;
 import com.dhc.gallery.R;
+import com.dhc.gallery.proxy.AnimatorListenerAdapterProxy;
 import com.dhc.gallery.utils.AndroidUtilities;
 import com.dhc.gallery.utils.LayoutHelper;
 

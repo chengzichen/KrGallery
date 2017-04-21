@@ -24,8 +24,8 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.dhc.gallery.AnimatorListenerAdapterProxy;
 import com.dhc.gallery.R;
+import com.dhc.gallery.proxy.AnimatorListenerAdapterProxy;
 import com.dhc.gallery.utils.AndroidUtilities;
 import com.dhc.gallery.utils.LayoutHelper;
 

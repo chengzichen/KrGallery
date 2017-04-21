@@ -16,7 +16,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import com.dhc.gallery.components.AnimatedFileDrawable;
-import com.dhc.gallery.ImageReceiver;
+import com.dhc.gallery.proxy.ImageReceiver;
 import com.dhc.gallery.tl.Document;
 import com.dhc.gallery.tl.FileLocation;
 import com.dhc.gallery.tl.PhotoSize;
