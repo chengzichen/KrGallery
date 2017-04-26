@@ -244,7 +244,7 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
                             if (cameraFile == null||CameraActivity.this.getParentActivity()==null) {
                                 return;
                             }
-                            PhotoViewer.getInstance().setParentActivity(CameraActivity.this.getParentActivity());
+//                            PhotoViewer.getInstance().setParentActivity(CameraActivity.this.getParentActivity());
                             //                            PhotoViewer.getInstance().setParentAlert(CameraActivity.this);
                             cameraPhoto = new ArrayList<>();
                             cameraPhoto.add(new MediaController.PhotoEntry(0, 0, 0, cameraFile.getAbsolutePath(), 0, true));

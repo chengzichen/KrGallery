@@ -105,7 +105,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
     private boolean isSelectPreview;
     private int sendPhotoType = 0;
     private AnimatedFileDrawable currentAnimation;
-
+    // TODO: 2017/4/23  这里是播放视频和编辑视频的地方 
     private AspectRatioFrameLayout aspectRatioFrameLayout;
     private TextureView videoTextureView;
     private ImageView videoPlayButton;
@@ -829,7 +829,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         });
 
         ActionBarMenu menu = actionBar.createMenu();
-
+        // TODO: 2017/4/23 裁剪
         // cropItem = menu.addItemWithWidth(gallery_menu_crop, R.drawable.photo_crop,
         // AndroidUtilities.dp(56));
 
@@ -1359,6 +1359,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         pickerView.updateSelectedCount(placeProvider.getSelectedCount(), false);
     }
 
+    // TODO: 2017/4/23 播放和编辑视频的处理 
     private void onPhotoShow(final FileLocation fileLocation, final List<Object> photos,
             int index,
             final PlaceProviderObject object) {
