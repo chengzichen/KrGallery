@@ -1,4 +1,5 @@
-    apply plugin: 'com.android.library'
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'//添加
 android {
 
     compileSdkVersion 25
@@ -9,10 +10,12 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    lintOptions {
+        abortOnError false
+    }
     buildTypes {
         release {
             zipAlignEnabled true
-            // 移除无用的resource文件
             shrinkResources true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -21,4 +24,14 @@ android {
 }
 
 dependencies {
+}
+
+//添加
+publish {
+    userOrg = 'chengzichen'//bintray.com用户名
+    groupId = 'com.dhc.krgallery'//jcenter上的路径
+    artifactId = 'gallerylib'//项目名称
+    publishVersion = '0.1'//版本号
+    desc = 'Oh hi, this is Crop , Video, Photos, from Telegram'//描述，不重要
+    website = 'https://github.com/chengzichen/KrGallery'//网站，不重要
 }
