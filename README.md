@@ -36,7 +36,7 @@ KrGallery摘取于[Telegram](https://github.com/DrKLO/Telegram "https://github.c
 
 ## 效果
 ![Image text](https://github.com/chengzichen/KrGallery/raw/master/gif/photos.gif)
-![Image text](https://github.com/chengzichen/KrGallery/raw/master/gif/selectcorp.gif)
+![Image text](https://github.com/chengzichen/KrGallery/raw/master/gif/selectcrop.gif)
 ![Image text](https://github.com/chengzichen/KrGallery/raw/master/gif/photocrop.gif)
 ![Image text](https://github.com/chengzichen/KrGallery/raw/master/gif/video.gif)
 
