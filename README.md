@@ -35,10 +35,10 @@ KrGallery摘取于[Telegram](https://github.com/DrKLO/Telegram "https://github.c
 * 目前只支持依赖lib的形式添加,后续添加仓库
 
 ## 效果
-![Markdown](http://i1.piimg.com/1949/51ab5a997a06871f.gif)
-![Markdown](http://i1.piimg.com/1949/7527cd34a0dae34f.gif)
-![Markdown](http://i1.piimg.com/567571/713b0586e0c425ad.gif)
-![Markdown](http://i1.piimg.com/567571/0145b68eea8d18e9.gif)
+![Image text](https://github.com/chengzichen/KrGallery/raw/master/gif/photos.gif)
+![Image text](https://github.com/chengzichen/KrGallery/raw/master/gif/selectcorp.gif)
+![Image text](https://github.com/chengzichen/KrGallery/raw/master/gif/photocrop.gif)
+![Image text](https://github.com/chengzichen/KrGallery/raw/master/gif/video.gif)
 
 ## 用途
 
