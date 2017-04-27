@@ -4,6 +4,7 @@ Crop , Video, Photos, from Telegram
 
 一个集**拍照和选择图片,裁剪**,**录制视频和选择视频**的强大且流畅简洁的库。
 
+
 KrGallery摘取于[Telegram](https://github.com/DrKLO/Telegram "https://github.com/DrKLO/Telegram"),基于[@TelegramGallery](https://github.com/TangXiaoLv/TelegramGallery)开发,快速，高效，低耗,轻量级,使用简单。
 
 - [功能](#功能)
@@ -30,9 +31,35 @@ KrGallery摘取于[Telegram](https://github.com/DrKLO/Telegram "https://github.c
 * 基本没有依赖于任何的三方库
 * 集拍照,选择图片,裁剪,录制视频和选择视频为一体
 
+----------
+
 ## 安装
 
-* 目前只支持依赖lib的形式添加,后续添加仓库
+ [![](https://jitpack.io/v/chengzichen/KrGallery.svg)](https://jitpack.io/#chengzichen/KrGallery)
+
+**Step 1.  在根目录的gradle文件中配置**
+
+
+**Add it in your root build.gradle at the end of repositories:**
+
+
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+
+
+**step2 添加依赖:**
+
+	dependencies {
+	        compile 'com.github.chengzichen:KrGallery:v1.0'
+	}
+
+
+----------
+
 
 ## 效果
 ![Image text](https://github.com/chengzichen/KrGallery/raw/master/gif/photos.gif)
