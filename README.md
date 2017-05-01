@@ -146,13 +146,14 @@ KrGallery摘取于[Telegram](https://github.com/DrKLO/Telegram "https://github.c
 
 		byte[] datas =dataIntent.getByteArrayExtra(GalleryActivity.DATA);
 
-### 录制视频
+### 录制视频(可限制录制时间)
 
 
 		 GalleryHelper
 		.with(MainActivity.this)    	//Activity or Fragment
 		.type(GalleryConfig.RECORD_VEDIO)//选择类型
 		.requestCode(12)				//startResultActivity requestcode 自己定义
+		.limitRecordTime(10)            //定义录制视频时间
 		.execute();
 		
 ### 选择视频
@@ -198,6 +199,7 @@ KrGallery摘取于[Telegram](https://github.com/DrKLO/Telegram "https://github.c
 		8. hintOfPick()										//hint of Toast when limit is reached
 		9. singlePhoto()									//选择单张照片
 		10. limitPickPhoto(int)  							//hint of Toast when limit is reached
+		11. limitRecordTime(int)                            //限制视频录制的时间
 		11. execute()
 
 
