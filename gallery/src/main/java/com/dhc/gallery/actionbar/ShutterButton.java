@@ -1,11 +1,3 @@
-/*
- * This is the source code of Telegram for Android v. 3.x.x.
- * It is licensed under GNU GPL v. 2 or later.
- * You should have received a copy of the license in this archive (see LICENSE).
- *
- * Copyright Nikolai Kudashov, 2013-2017.
- */
-
 package com.dhc.gallery.actionbar;
 
 import android.animation.AnimatorSet;
@@ -161,9 +153,7 @@ public class ShutterButton extends View {
     public boolean onTouchEvent(MotionEvent motionEvent) {
         if (type == 0) {
             return onTouchTypeOne(motionEvent);
-
         } else if (type == 1) {
-
             return onTouchTypeTwo(motionEvent);
         } else if (type == 2) {
 
@@ -259,7 +249,6 @@ public class ShutterButton extends View {
                     }
                     if (x < 0 || y < 0 || x > getMeasuredWidth() || y > getMeasuredHeight()) {
                         if (state == State.RECORDING) {
-                            setHighlighted(false);
                             delegate.shutterCancel();
                             setState(State.DEFAULT, true);
                         }
@@ -275,6 +264,12 @@ public class ShutterButton extends View {
     public void setState(State value, boolean animated) {
         if (state != value) {
             state = value;
+            if(value==State.DEFAULT){
+                processRelease = true;
+                isVedio = true;
+                setHighlighted(false);
+                pressed = false;
+            }
             if (animated) {
                 lastUpdateTime = System.currentTimeMillis();
                 totalTime = 0;
