@@ -54,7 +54,7 @@ KrGallery摘取于[Telegram](https://github.com/DrKLO/Telegram "https://github.c
 **step2 添加依赖:**
 
 	dependencies {
-	        compile 'com.github.chengzichen:KrGallery:v1.0'
+	        compile 'com.github.chengzichen:KrGallery:v1.01'
 	}
 
 
