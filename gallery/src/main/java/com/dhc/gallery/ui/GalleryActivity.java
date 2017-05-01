@@ -53,7 +53,7 @@ public class GalleryActivity extends Activity implements ActionBarLayout.ActionB
             Intent intent = getIntent();
             config = intent.getParcelableExtra(GALLERY_CONFIG);
         } else {
-            config = savedInstanceState.getParcelable("CONFIG");
+            config = savedInstanceState.getParcelable(GALLERY_CONFIG);
         }
         Gallery.init(getApplication());
         FrameLayout mian = (FrameLayout) findViewById(R.id.mian);
@@ -85,7 +85,7 @@ public class GalleryActivity extends Activity implements ActionBarLayout.ActionB
         if (config.getType() == GalleryConfig.RECORD_VEDIO
                 || config.getType() == GalleryConfig.TAKE_PHOTO
                 || config.getType() == GalleryConfig.TAKEPHOTO_RECORDVEDIO) {
-            CameraActivity cameraActivity = new CameraActivity(config);
+            CameraActivity cameraActivity = new CameraActivity(getIntent().getExtras());
             actionBarLayout.presentFragment(cameraActivity, false, true, true);
             cameraActivity.setDelegate(this);
         } else if (config.getType() == GalleryConfig.SELECT_PHOTO
@@ -152,7 +152,7 @@ public class GalleryActivity extends Activity implements ActionBarLayout.ActionB
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (config != null)
-            outState.putParcelable("CONFIG", config);
+            outState.putParcelable(GALLERY_CONFIG, config);
     }
 
     @Override
@@ -267,6 +267,18 @@ public class GalleryActivity extends Activity implements ActionBarLayout.ActionB
         Intent intent = new Intent(activity.getActivity(), GalleryActivity.class);
         intent.putExtra(GALLERY_CONFIG, config);
         activity.startActivityForResult(intent, requestCode);
+    }
+    /**
+     * open gallery
+     *
+     * @param fragment    parent activity
+     * @param requestCode {@link Activity#onActivityResult}
+     * @param config      {@link GalleryConfig}
+     */
+    public static void openActivity(android.support.v4.app.Fragment fragment, int requestCode, GalleryConfig config) {
+        Intent intent = new Intent(fragment.getActivity(), GalleryActivity.class);
+        intent.putExtra(GALLERY_CONFIG, config);
+        fragment.startActivityForResult(intent, requestCode);
     }
 
     /**

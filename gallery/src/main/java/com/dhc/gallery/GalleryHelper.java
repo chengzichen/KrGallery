@@ -30,6 +30,7 @@ public class GalleryHelper {
     }
     private Activity mActivity;
     private Fragment mFragment;
+    private android.support.v4.app.Fragment mV4Fragment;
 
 
     GalleryConfig configuration = new GalleryConfig();
@@ -57,6 +58,16 @@ public class GalleryHelper {
         return instance;
     }
     /**
+     * 从哪里开启
+     * @param mFragment
+     * @return
+     */
+    public static GalleryHelper with(android.support.v4.app.Fragment mV4Fragment ){
+        instance = new GalleryHelper();
+        instance.mV4Fragment=mV4Fragment;
+        return instance;
+    }
+    /**
      *
      * 选择的类型
      * @param type
@@ -79,6 +90,16 @@ public class GalleryHelper {
      */
     public GalleryHelper requestCode(int type) {
         configuration.setRequestCode(type);
+        return this;
+    }
+
+    /**
+     * 限定视频录制时间
+     * @param limitRecordTime
+     * @return
+     */
+    public GalleryHelper limitRecordTime(int limitRecordTime) {
+        configuration.setLimitRecordTime(limitRecordTime);
         return this;
     }
 
@@ -167,9 +188,9 @@ public class GalleryHelper {
             GalleryActivity.openActivity(mActivity,configuration.getRequestCode(),configuration);
         }else  if(mFragment!=null){
             GalleryActivity.openActivity(mFragment,configuration.getRequestCode(),configuration);
+        }else if(mV4Fragment!=null){
+            GalleryActivity.openActivity(mV4Fragment,configuration.getRequestCode(),configuration);
         }
-
-
     }
     private   boolean existSDcard() {
         String externalStorageState;

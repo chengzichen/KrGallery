@@ -26,6 +26,7 @@ public class GalleryConfig implements Parcelable {
     private String filePath;
     private int type = SELECT_PHOTO;
     private int requestCode = -1;
+    private int  limitRecordTime;
 
 
     public GalleryConfig() {
@@ -39,6 +40,13 @@ public class GalleryConfig implements Parcelable {
         this.filterMimeTypes = filterMimeTypes;
     }
 
+    public int getLimitRecordTime() {
+        return limitRecordTime;
+    }
+
+    public void setLimitRecordTime(int limitRecordTime) {
+        this.limitRecordTime = limitRecordTime;
+    }
 
     public String getHintOfPick() {
         return hintOfPick;
@@ -121,6 +129,7 @@ public class GalleryConfig implements Parcelable {
         dest.writeString(this.filePath);
         dest.writeInt(this.type);
         dest.writeInt(this.requestCode);
+        dest.writeInt(this.limitRecordTime);
     }
 
     protected GalleryConfig(Parcel in) {
@@ -133,6 +142,7 @@ public class GalleryConfig implements Parcelable {
         this.filePath = in.readString();
         this.type = in.readInt();
         this.requestCode = in.readInt();
+        this.limitRecordTime = in.readInt();
     }
 
     public static final Parcelable.Creator<GalleryConfig> CREATOR = new Parcelable.Creator<GalleryConfig>() {

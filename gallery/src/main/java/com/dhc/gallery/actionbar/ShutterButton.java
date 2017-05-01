@@ -247,12 +247,12 @@ public class ShutterButton extends View {
                     if (processRelease && x >= 0 && y >= 0 && x <= getMeasuredWidth() && y <= getMeasuredHeight()) {
                         delegate.shutterLongPressedReleased();
                     }
-                    if (x < 0 || y < 0 || x > getMeasuredWidth() || y > getMeasuredHeight()) {
-                        if (state == State.RECORDING) {
-                            delegate.shutterCancel();
-                            setState(State.DEFAULT, true);
-                        }
-                    }
+//                    if (x < 0 || y < 0 || x > getMeasuredWidth() || y > getMeasuredHeight()) {
+//                        if (state == State.RECORDING) {
+//                            delegate.shutterCancel();
+//                            setState(State.DEFAULT, true);
+//                        }
+//                    }
                     setHighlighted(false);
                     pressed = false;
                 }

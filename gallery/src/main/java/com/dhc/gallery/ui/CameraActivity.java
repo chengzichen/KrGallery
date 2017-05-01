@@ -14,6 +14,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.hardware.Camera;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -38,6 +39,8 @@ import com.dhc.gallery.utils.NotificationCenter;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import static com.dhc.gallery.ui.GalleryActivity.GALLERY_CONFIG;
 
 /**
  * 创建者     邓浩宸
@@ -64,6 +67,7 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
     private boolean paused;
     private boolean requestingPermissions;
     private boolean cameraAnimationInProgress;
+    private String initRecordTimes;
     private boolean pressed;
     private boolean maybeStartDraging;
     private float lastY;
@@ -80,20 +84,16 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
         void didVedioOver(String absolutePath);
     }
 
-    public CameraActivity() {
 
-    }
-
-    public CameraActivity(GalleryConfig args) {
-        mGalleryConfig = args;
+    public CameraActivity(Bundle args) {
+        super(args);
     }
 
     @Override
     public boolean onFragmentCreate() {
-
+        mGalleryConfig = getArguments().getParcelable(GALLERY_CONFIG);
         return super.onFragmentCreate();
     }
-
 
     @Override
     public void onFragmentDestroy() {
@@ -145,7 +145,7 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
             }
         };
         FrameLayout frameLayout = (FrameLayout) fragmentView;
-        frameLayout.setBackgroundColor(0xff000000 );
+        frameLayout.setBackgroundColor(0xff000000);
         frameLayout.setLayoutParams(LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
         if (Build.VERSION.SDK_INT >= 21) {
             frameLayout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN);
@@ -160,12 +160,13 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
         if (deviceHasGoodCamera) {
             CameraController.getInstance().initCamera();
         }
+        initRecordTimes = mGalleryConfig.getLimitRecordTime() == 0 ? "00:00" : String.format("%02d:%02d", mGalleryConfig.getLimitRecordTime() / 60, mGalleryConfig.getLimitRecordTime() % 60);
 
         if (Build.VERSION.SDK_INT >= 16) {
             recordTime = new TextView(context);
             recordTime.setBackgroundResource(R.drawable.system);
             recordTime.getBackground().setColorFilter(new PorterDuffColorFilter(0x66000000, PorterDuff.Mode.MULTIPLY));
-            recordTime.setText("00:00");
+            recordTime.setText(initRecordTimes);
             recordTime.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
             recordTime.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
             recordTime.setAlpha(0.0f);
@@ -224,15 +225,25 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
                     switchCameraButton.setVisibility(View.GONE);
                     cameraFile = AndroidUtilities.generateVideoPath();
                     recordTime.setAlpha(1.0f);
-                    recordTime.setText("00:00");
-                    videoRecordTime = 0;
+                    recordTime.setText(initRecordTimes);
+                    videoRecordTime = mGalleryConfig.getLimitRecordTime();
                     videoRecordRunnable = new Runnable() {
                         @Override
                         public void run() {
                             if (videoRecordRunnable == null) {
                                 return;
                             }
-                            videoRecordTime++;
+                            if (mGalleryConfig.getLimitRecordTime() == 0) {
+
+                                videoRecordTime++;
+                            } else {
+                                videoRecordTime--;
+                                if (videoRecordTime == 0) {
+                                    if (vedioReleased())
+                                        return;
+                                }
+                            }
+                            //TODO 录制事件的限制
                             recordTime.setText(String.format("%02d:%02d", videoRecordTime / 60, videoRecordTime % 60));
                             AndroidUtilities.runOnUIThread(videoRecordRunnable, 1000);
                         }
@@ -241,10 +252,10 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
                     CameraController.getInstance().recordVideo(cameraView.getCameraSession(), cameraFile, new CameraController.VideoTakeCallback() {
                         @Override
                         public void onFinishVideoRecording(final Bitmap thumb) {
-                            if (cameraFile == null||CameraActivity.this.getParentActivity()==null) {
+                            if (cameraFile == null || CameraActivity.this.getParentActivity() == null) {
                                 return;
                             }
-//                            PhotoViewer.getInstance().setParentActivity(CameraActivity.this.getParentActivity());
+                            //                            PhotoViewer.getInstance().setParentActivity(CameraActivity.this.getParentActivity());
                             //                            PhotoViewer.getInstance().setParentAlert(CameraActivity.this);
                             cameraPhoto = new ArrayList<>();
                             cameraPhoto.add(new MediaController.PhotoEntry(0, 0, 0, cameraFile.getAbsolutePath(), 0, true));
@@ -383,8 +394,6 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
                 public void shutterLongPressedReleased() {
                     if (vedioReleased())
                         return;
-
-
                 }
             });
 
@@ -456,7 +465,7 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
     private String getVedioSize(String absolutePath) {
         File convertedFile = new File(absolutePath);
         String message = "";
-        if (convertedFile.exists()&&convertedFile.length()!=0&&CameraActivity.this.getParentActivity()!=null) {
+        if (convertedFile.exists() && convertedFile.length() != 0 && CameraActivity.this.getParentActivity() != null) {
             int b = (int) convertedFile.length();
             int kb = b / 1024;
             float mb = kb / 1024f;
@@ -466,7 +475,6 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
             if (mb <= 1 && kb < 10) {
                 // FIXME: 2017/4/18
                 // TODO: 2017/4/7   视屏录制时间 过段  走着了 ，正式开发中去处理
-                //                tooShortAlert();
                 return message;
             }
         }
@@ -523,7 +531,7 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
             if (cameraOpened) {
                 hideCamera(true);
             }
-                //                closeCamera(false);
+            //                closeCamera(false);
         } else {
             if (cameraView != null && shutterButton.getState() == ShutterButton.State.RECORDING) {
                 shutterButton.setState(ShutterButton.State.DEFAULT, true);
@@ -536,6 +544,8 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
     @Override
     public void onResume() {
         if (paused) {
+            if (mGalleryConfig == null)
+                mGalleryConfig = getArguments().getParcelable(GALLERY_CONFIG);
             checkCamera(false);
             cameraPanel.bringToFront();
             recordTime.bringToFront();
@@ -563,9 +573,6 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
             CameraController.getInstance().initCamera();
             deviceHasGoodCamera = CameraController.getInstance().isCameraInitied();
         }
-        //        if (old != deviceHasGoodCamera && photoAttachAdapter != null) {
-        //            photoAttachAdapter.notifyDataSetChanged();
-        //        }
         if (deviceHasGoodCamera && !cameraOpened) {
             cameraOpened = true;
             showCamera();
@@ -649,29 +656,6 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
             }
         } else if (pressed) {
             if (event.getActionMasked() == MotionEvent.ACTION_MOVE) {
-                //                                float newY = event.getY();
-                //                                float dy = (newY - lastY);
-                //                                if (maybeStartDraging) {
-                //                                    if (Math.abs(dy) > AndroidUtilities.getPixelsInCM(0.4f, false)) {
-                //                                        maybeStartDraging = false;
-                //                                        dragging = true;
-                //                                    }
-                //                                } else if (dragging) {
-                //                                    if (cameraView != null) {
-                //                                        cameraView.setTranslationY(cameraView.getTranslationY() + dy);
-                //                                        lastY = newY;
-                //                                        if (cameraPanel.getTag() == null) {
-                //                                            cameraPanel.setTag(1);
-                //                                            AnimatorSet animatorSet = new AnimatorSet();
-                //                                            animatorSet.playTogether(
-                //                                                    ObjectAnimator.ofFloat(cameraPanel, "alpha", 0.0f),
-                //                                                    ObjectAnimator.ofFloat(flashModeButton[0], "alpha", 0.0f),
-                //                                                    ObjectAnimator.ofFloat(flashModeButton[1], "alpha", 0.0f));
-                //                                            animatorSet.setDuration(200);
-                //                                            animatorSet.start();
-                //                                        }
-                //                                    }
-                //                                }
             } else if (event.getActionMasked() == MotionEvent.ACTION_CANCEL || event.getActionMasked() == MotionEvent.ACTION_UP || event.getActionMasked() == MotionEvent.ACTION_POINTER_UP) {
                 pressed = false;
                 if (dragging) {

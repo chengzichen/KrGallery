@@ -24,6 +24,7 @@ android {
 }
 
 dependencies {
+    compile 'com.android.support:support-fragment:25.3.0'
 }
 
 //添加
