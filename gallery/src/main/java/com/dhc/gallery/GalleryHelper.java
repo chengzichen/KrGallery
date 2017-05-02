@@ -177,7 +177,7 @@ public class GalleryHelper {
 
 
     public void execute() {
-        if(mActivity == null&&mFragment==null) {
+        if(mActivity == null&&mFragment==null&&mV4Fragment==null) {
             return;
         }
         if(!existSDcard()){
