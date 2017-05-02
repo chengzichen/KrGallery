@@ -35,7 +35,9 @@ KrGallery摘取于[Telegram](https://github.com/DrKLO/Telegram "https://github.c
 
 ## 安装
 
- [![](https://jitpack.io/v/chengzichen/KrGallery.svg)](https://jitpack.io/#chengzichen/KrGallery)
+ [![](https://jitpack.io/v/chengzichen/KrGallery.svg)](https://jitpack.io/#chengzichen/KrGallery) [ ![Download](https://api.bintray.com/packages/chengzichen/maven/gallerylib/images/download.svg) ](https://bintray.com/chengzichen/maven/gallerylib/_latestVersion)
+
+- 方式一:
 
 **Step 1.  在根目录的gradle文件中配置**
 
@@ -56,6 +58,29 @@ KrGallery摘取于[Telegram](https://github.com/DrKLO/Telegram "https://github.c
 	dependencies {
 	        compile 'com.github.chengzichen:KrGallery:v1.01'
 	}
+
+
+
+- 方式二:
+
+
+**Step 1.  在根目录的gradle文件中配置**
+
+		allprojects {
+				repositories {
+					...
+					 jcenter()
+				}
+			}
+
+
+**step2 添加依赖:**
+
+
+	dependencies {
+		      compile 'com.dhc.krgallery:gallerylib:1.01'
+		}
+
 
 
 ----------
