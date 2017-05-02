@@ -32,4 +32,5 @@ dependencies {
     compile (project(':gallery')){
         exclude module:"support-fragment"
     }
+    compile 'com.yanzhenjie:permission:1.0.5'
 }
