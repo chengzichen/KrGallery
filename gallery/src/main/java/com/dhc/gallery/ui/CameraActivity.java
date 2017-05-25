@@ -110,10 +110,12 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
             return;
         }
         hideCamera(true);
+        if(cameraView!=null){
         cameraView.destroy(true, null);
         FrameLayout frameLayout = (FrameLayout) fragmentView;
         frameLayout.removeView(cameraView);
         cameraView = null;
+        }
         fragmentView = null;
         if (mBaseDialog != null)
             mBaseDialog.dismiss();
@@ -123,7 +125,7 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
     @Override
     public void didReceivedNotification(int id, Object... args) {
         if (id == NotificationCenter.cameraInitied) {
-            checkCamera(false);
+            checkCamera(true);
             cameraPanel.bringToFront();
             recordTime.bringToFront();
         }
@@ -156,7 +158,7 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
 
     private void initView(final Context context) {
         NotificationCenter.getInstance().addObserver(this, NotificationCenter.cameraInitied);
-        checkCamera(false);
+        checkCamera(true);
         if (deviceHasGoodCamera) {
             CameraController.getInstance().initCamera();
         }
@@ -546,7 +548,7 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
         if (paused) {
             if (mGalleryConfig == null)
                 mGalleryConfig = getArguments().getParcelable(GALLERY_CONFIG);
-            checkCamera(false);
+            checkCamera(true);
             cameraPanel.bringToFront();
             recordTime.bringToFront();
         }
@@ -628,6 +630,9 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
             return;
         }
         cameraView.destroy(async, null);
+        FrameLayout frameLayout = (FrameLayout) fragmentView;
+        frameLayout.removeView(cameraView);
+        cameraView = null;
         cameraOpened = false;
     }
 
