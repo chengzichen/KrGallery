@@ -56,7 +56,7 @@ KrGallery摘取于[Telegram](https://github.com/DrKLO/Telegram "https://github.c
 **step2 添加依赖:**
 
 	dependencies {
-	        compile 'com.github.chengzichen:KrGallery:v1.01'
+	     compile 'com.github.chengzichen:KrGallery:v1.0.2'
 	}
 
 
@@ -78,7 +78,7 @@ KrGallery摘取于[Telegram](https://github.com/DrKLO/Telegram "https://github.c
 
 
 	dependencies {
-		      compile 'com.dhc.krgallery:gallerylib:1.01'
+		      compile 'com.dhc.krgallery:gallerylib:1.0.2'
 		}
 
 
@@ -179,6 +179,7 @@ KrGallery摘取于[Telegram](https://github.com/DrKLO/Telegram "https://github.c
 		.type(GalleryConfig.RECORD_VEDIO)//选择类型
 		.requestCode(12)				//startResultActivity requestcode 自己定义
 		.limitRecordTime(10)            //定义录制视频时间
+		.limitRecordSize(10)            //定义录制视频时间
 		.execute();
 		
 ### 选择视频
