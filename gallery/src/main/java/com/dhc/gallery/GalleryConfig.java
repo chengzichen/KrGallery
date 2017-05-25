@@ -26,7 +26,8 @@ public class GalleryConfig implements Parcelable {
     private String filePath;
     private int type = SELECT_PHOTO;
     private int requestCode = -1;
-    private int  limitRecordTime;
+    private int limitRecordTime;
+    private int limitRecordSize;
 
 
     public GalleryConfig() {
@@ -38,6 +39,14 @@ public class GalleryConfig implements Parcelable {
 
     public void setFilterMimeTypes(String[] filterMimeTypes) {
         this.filterMimeTypes = filterMimeTypes;
+    }
+
+    public int getLimitRecordSize() {
+        return limitRecordSize;
+    }
+
+    public void setLimitRecordSize(int limitRecordSize) {
+        this.limitRecordSize = limitRecordSize;
     }
 
     public int getLimitRecordTime() {
@@ -130,6 +139,7 @@ public class GalleryConfig implements Parcelable {
         dest.writeInt(this.type);
         dest.writeInt(this.requestCode);
         dest.writeInt(this.limitRecordTime);
+        dest.writeInt(this.limitRecordSize);
     }
 
     protected GalleryConfig(Parcel in) {
@@ -143,6 +153,7 @@ public class GalleryConfig implements Parcelable {
         this.type = in.readInt();
         this.requestCode = in.readInt();
         this.limitRecordTime = in.readInt();
+        this.limitRecordSize = in.readInt();
     }
 
     public static final Parcelable.Creator<GalleryConfig> CREATOR = new Parcelable.Creator<GalleryConfig>() {

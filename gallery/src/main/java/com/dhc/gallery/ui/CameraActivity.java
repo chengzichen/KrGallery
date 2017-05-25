@@ -15,6 +15,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -40,6 +41,7 @@ import com.dhc.gallery.utils.NotificationCenter;
 import java.io.File;
 import java.util.ArrayList;
 
+import static android.content.ContentValues.TAG;
 import static com.dhc.gallery.ui.GalleryActivity.GALLERY_CONFIG;
 
 /**
@@ -75,7 +77,8 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
     private int[] viewPosition = new int[2];
     private DecelerateInterpolator interpolator = new DecelerateInterpolator(1.5f);
     private GalleryConfig mGalleryConfig;
-    BaseDialog mBaseDialog;
+    private BaseDialog mBaseDialog;
+    private File mFile;
 
     public interface CameraActivityDelegate {
 
@@ -110,11 +113,11 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
             return;
         }
         hideCamera(true);
-        if(cameraView!=null){
-        cameraView.destroy(true, null);
-        FrameLayout frameLayout = (FrameLayout) fragmentView;
-        frameLayout.removeView(cameraView);
-        cameraView = null;
+        if (cameraView != null) {
+            cameraView.destroy(true, null);
+            FrameLayout frameLayout = (FrameLayout) fragmentView;
+            frameLayout.removeView(cameraView);
+            cameraView = null;
         }
         fragmentView = null;
         if (mBaseDialog != null)
@@ -236,11 +239,20 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
                                 return;
                             }
                             if (mGalleryConfig.getLimitRecordTime() == 0) {
-
                                 videoRecordTime++;
+
                             } else {
                                 videoRecordTime--;
                                 if (videoRecordTime == 0) {
+                                    if (vedioReleased())
+                                        return;
+                                }
+                            }
+                            Log.d(TAG, "run " + mGalleryConfig.getLimitRecordSize());
+                            if (mGalleryConfig.getLimitRecordSize() != 0) {
+                                int b = getSize(cameraFile);
+                                Log.d(TAG, "run " + b);
+                                if (b > 0 && b >= mGalleryConfig.getLimitRecordSize() * 1024 * 1024) {
                                     if (vedioReleased())
                                         return;
                                 }
@@ -263,7 +275,7 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
                             cameraPhoto.add(new MediaController.PhotoEntry(0, 0, 0, cameraFile.getAbsolutePath(), 0, true));
                             //                                                        Log.d("VV", "录制结束");
 
-                            String msg = getVedioSize(cameraFile.getAbsolutePath());
+                            String msg = getVedioSize(cameraFile);
                             mBaseDialog = getDialog(CameraActivity.this.getParentActivity(), msg, new PhotoViewer.EmptyPhotoViewerProvider() {
 
 
@@ -464,23 +476,30 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
         }
     }
 
-    private String getVedioSize(String absolutePath) {
-        File convertedFile = new File(absolutePath);
+    private String getVedioSize(File convertedFile) {
         String message = "";
         if (convertedFile.exists() && convertedFile.length() != 0 && CameraActivity.this.getParentActivity() != null) {
             int b = (int) convertedFile.length();
             int kb = b / 1024;
             float mb = kb / 1024f;
-            message += mb > 1 ? CameraActivity.this.getParentActivity().getString(R.string.capture_video_size_in_mb, mb)
-                    : CameraActivity.this.getParentActivity().getString(R.string.capture_video_size_in_kb, kb);
-            message += CameraActivity.this.getParentActivity().getString(R.string.is_send_video);
-            if (mb <= 1 && kb < 10) {
-                // FIXME: 2017/4/18
-                // TODO: 2017/4/7   视屏录制时间 过段  走着了 ，正式开发中去处理
-                return message;
+            if (b > mGalleryConfig.getLimitRecordSize() * 1024 * 1024) {
+                message += mb > 1 ? CameraActivity.this.getParentActivity().getString(R.string.over_video_size_in_mb, mb)
+                        : CameraActivity.this.getParentActivity().getString(R.string.over_video_size_in_kb, kb);
+            } else {
+                message += mb > 1 ? CameraActivity.this.getParentActivity().getString(R.string.capture_video_size_in_mb, mb)
+                        : CameraActivity.this.getParentActivity().getString(R.string.capture_video_size_in_kb, kb);
             }
+
+            message += CameraActivity.this.getParentActivity().getString(R.string.is_send_video);
         }
         return message;
+    }
+
+    private int getSize(File convertedFile) {
+        if (!convertedFile.exists() && convertedFile.length() == 0)
+            return 0;
+        int b = (int) convertedFile.length();
+        return b;
     }
 
     private BaseDialog getDialog(Context context, String msg, final PhotoViewer.EmptyPhotoViewerProvider emptyPhotoViewerProvider) {
