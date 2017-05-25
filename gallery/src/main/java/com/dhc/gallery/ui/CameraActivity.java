@@ -15,7 +15,6 @@ import android.graphics.PorterDuffColorFilter;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -41,7 +40,6 @@ import com.dhc.gallery.utils.NotificationCenter;
 import java.io.File;
 import java.util.ArrayList;
 
-import static android.content.ContentValues.TAG;
 import static com.dhc.gallery.ui.GalleryActivity.GALLERY_CONFIG;
 
 /**
@@ -248,10 +246,8 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
                                         return;
                                 }
                             }
-                            Log.d(TAG, "run " + mGalleryConfig.getLimitRecordSize());
                             if (mGalleryConfig.getLimitRecordSize() != 0) {
                                 int b = getSize(cameraFile);
-                                Log.d(TAG, "run " + b);
                                 if (b > 0 && b >= mGalleryConfig.getLimitRecordSize() * 1024 * 1024) {
                                     if (vedioReleased())
                                         return;
