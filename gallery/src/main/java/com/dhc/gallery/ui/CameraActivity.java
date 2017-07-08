@@ -13,8 +13,10 @@ import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.hardware.Camera;
+import android.media.ExifInterface;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -40,6 +42,7 @@ import com.dhc.gallery.utils.NotificationCenter;
 import java.io.File;
 import java.util.ArrayList;
 
+import static android.content.ContentValues.TAG;
 import static com.dhc.gallery.ui.GalleryActivity.GALLERY_CONFIG;
 
 /**
@@ -350,6 +353,23 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
                             PhotoViewer.getInstance().setParentActivity(CameraActivity.this.getParentActivity());
                             cameraPhoto = new ArrayList<>();
                             int orientation = 0;
+                            try {
+                                ExifInterface ei = new ExifInterface(cameraFile.getAbsolutePath());
+                                int exif = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                                switch (exif) {
+                                    case ExifInterface.ORIENTATION_ROTATE_90:
+                                        orientation = 90;
+                                        break;
+                                    case ExifInterface.ORIENTATION_ROTATE_180:
+                                        orientation = 180;
+                                        break;
+                                    case ExifInterface.ORIENTATION_ROTATE_270:
+                                        orientation = 270;
+                                        break;
+                                }
+                            } catch (Exception e) {
+                                Log.d(TAG, "run "+e);
+                            }
                             cameraPhoto.add(new MediaController.PhotoEntry(0, 0, 0, cameraFile.getAbsolutePath(), orientation, false));
                             PhotoViewer.getInstance().openPhotoForSelect(cameraPhoto, false, 0, 1,
                                     new PhotoViewer.EmptyPhotoViewerProvider() {

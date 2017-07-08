@@ -539,8 +539,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         @Override
         protected void onLayout(boolean changed, int l, int t, int r, int b) {
             final int count = getChildCount();
-
-            int paddingBottom = 0;
+            int paddingBottom =  0;
 
             for (int i = 0; i < count; i++) {
                 final View child = getChildAt(i);
@@ -568,7 +567,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                         childLeft = (r - l - width) / 2 + lp.leftMargin - lp.rightMargin;
                         break;
                     case Gravity.RIGHT:
-                        childLeft = r - width - lp.rightMargin;
+                        childLeft = (r - l - width) - lp.rightMargin;
                         break;
                     case Gravity.LEFT:
                     default:
@@ -580,8 +579,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                         childTop = lp.topMargin;
                         break;
                     case Gravity.CENTER_VERTICAL:
-                        childTop = ((b - paddingBottom) - t - height) / 2 + lp.topMargin
-                                - lp.bottomMargin;
+                        childTop = ((b - paddingBottom) - t - height) / 2 + lp.topMargin - lp.bottomMargin;
                         break;
                     case Gravity.BOTTOM:
                         childTop = ((b - paddingBottom) - t) - height - lp.bottomMargin;
@@ -2060,14 +2058,12 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             animatingImageView.setLayoutParams(layoutParams);
 
             float scaleX = (float) AndroidUtilities.displaySize.x / layoutParams.width;
-            float scaleY = (float) (AndroidUtilities.displaySize.y
-                    - AndroidUtilities.statusBarHeight) / layoutParams.height;
+            float scaleY = (float) (AndroidUtilities.displaySize.y + (Build.VERSION.SDK_INT >= 21 ? AndroidUtilities.statusBarHeight : 0)) / layoutParams.height;
             float scale2 = scaleX > scaleY ? scaleY : scaleX;
             float width = layoutParams.width * scale * scale2;
             float height = layoutParams.height * scale * scale2;
             float xPos = (AndroidUtilities.displaySize.x - width) / 2.0f;
-            float yPos = (AndroidUtilities.displaySize.y - AndroidUtilities.statusBarHeight
-                    - height) / 2.0f;
+            float yPos = ((AndroidUtilities.displaySize.y + (Build.VERSION.SDK_INT >= 21 ? AndroidUtilities.statusBarHeight : 0)) - height) / 2.0f;
             animatingImageView.setTranslationX(xPos + translationX);
             animatingImageView.setTranslationY(yPos + translationY);
             animatingImageView.setScaleX(scale * scale2);
