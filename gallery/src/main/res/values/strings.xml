@@ -36,5 +36,7 @@
 
     <string name="capture_video_size_in_kb">视频文件大小为: %1$dKB,</string>
     <string name="capture_video_size_in_mb">视频文件大小为: %1$.2fMB,</string>
+    <string name="over_video_size_in_kb">视频已超限,大小为: %1$dKB,</string>
+    <string name="over_video_size_in_mb">视频已超限,大小为: %1$.2fMB,</string>
     <string name="is_send_video">是否发送该视频？</string>
 </resources>

@@ -37,7 +37,7 @@ public class GalleryHelper {
     static GalleryHelper instance;
 
     /**
-     * 从哪里开启
+     * 开启页面
      * @param mActivity
      * @return
      */
@@ -48,7 +48,7 @@ public class GalleryHelper {
     }
 
     /**
-     * 从哪里开启
+     * 开启页面
      * @param mFragment
      * @return
      */
@@ -58,9 +58,9 @@ public class GalleryHelper {
         return instance;
     }
     /**
-     * 从哪里开启
-     * @param mFragment
-     * @return
+     * 开启页面
+     * @param mV4Fragment
+     * @return GalleryHelper
      */
     public static GalleryHelper with(android.support.v4.app.Fragment mV4Fragment ){
         instance = new GalleryHelper();
@@ -76,7 +76,7 @@ public class GalleryHelper {
      * {@link GalleryConfig.RECORD_VEDIO }
      * {@link GalleryConfig.SELECT_VEDIO }
      * {@link GalleryConfig.TAKEPHOTO_RECORDVEDIO }
-     * @return
+     * @return GalleryHelper
      */
     public GalleryHelper type(int type) {
         configuration.setType(type);
@@ -86,7 +86,7 @@ public class GalleryHelper {
     /**
      * 响应码
      * @param type
-     * @return
+     * @return GalleryHelper
      */
     public GalleryHelper requestCode(int type) {
         configuration.setRequestCode(type);
@@ -96,10 +96,19 @@ public class GalleryHelper {
     /**
      * 限定视频录制时间
      * @param limitRecordTime
-     * @return
+     * @return GalleryHelper
      */
     public GalleryHelper limitRecordTime(int limitRecordTime) {
         configuration.setLimitRecordTime(limitRecordTime);
+        return this;
+    }
+    /**
+     * 限定视频录制大小
+     * @param limitRecordSize
+     * @return GalleryHelper
+     */
+    public GalleryHelper limitRecordSize(int limitRecordSize) {
+        configuration.setLimitRecordSize(limitRecordSize);
         return this;
     }
 

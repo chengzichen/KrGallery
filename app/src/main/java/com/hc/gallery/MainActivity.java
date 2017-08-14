@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements PermissionListene
 
                         GalleryHelper.with(MainActivity.this).type(GalleryConfig.RECORD_VEDIO).requestCode(12)
 //                                .limitRecordTime(10)//限制时长
+                                .limitRecordSize(1)//限制大小
                                 .execute();
                         break;
                     case 5:/***拍照片onActivityResult {@link GalleryActivity.PHOTOS}*/
