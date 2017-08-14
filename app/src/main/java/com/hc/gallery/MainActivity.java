@@ -1,15 +1,19 @@
 package com.hc.gallery;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements PermissionListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        hideStatusBar();
         setContentView(R.layout.activity_main);
         StorageUtil.init(this, null);//初始化监测sdcard
         mList = new ArrayList<>();
@@ -177,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements PermissionListene
     public void onFailed(int requestCode, List<String> deniedPermissions) {
         Toast.makeText(this, "权限获取失败", Toast.LENGTH_SHORT).show();
         // 用户否勾选了不再提示并且拒绝了权限，那么提示用户到设置中授权。
-        if (AndPermission.hasAlwaysDeniedPermission(this, deniedPermissions)) {
+        if (!AndPermission.hasAlwaysDeniedPermission(this, deniedPermissions)) {
             // 第一种：用默认的提示语。
             AndPermission.defaultSettingDialog(this, 300).show();
         }
@@ -209,5 +214,27 @@ public class MainActivity extends AppCompatActivity implements PermissionListene
                 Toast.makeText(this, "从设置回来", Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    /**
+     * 隐藏状态栏
+     * <p>
+     * 在setContentView前调用
+     */
+    protected void hideStatusBar() {
+        final int sdkVer = Build.VERSION.SDK_INT;
+        if (sdkVer < 16) {
+            //4.0及一下
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        } else {
+            View decorView = getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+            decorView.setSystemUiVisibility(uiOptions);
+            ActionBar actionBar = getActionBar();
+            if (actionBar != null) {
+                actionBar.hide();
+            }
+        }
     }
 }

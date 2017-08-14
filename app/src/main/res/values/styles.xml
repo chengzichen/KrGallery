@@ -21,6 +21,9 @@
         <item name="android:listChoiceBackgroundIndicator">@drawable/list_selector</item>
         <item name="android:actionBarItemBackground">@drawable/bar_selector_style</item>
     </style>
-
+    <!--全屏-->
+    <style name="AppTheme.Splash" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
 
 </resources>

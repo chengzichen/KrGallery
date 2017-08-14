@@ -488,7 +488,6 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         @Override
         protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-            System.out.println();
         }
 
         @Override
