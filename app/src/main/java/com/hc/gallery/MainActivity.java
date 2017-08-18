@@ -51,6 +51,21 @@ public class MainActivity extends AppCompatActivity implements PermissionListene
         mList.add((mList.size() + 1) + ".  拍摄视频(可限制时长)");
         mList.add((mList.size() + 1) + ".  拍照片");
         mList.add((mList.size() + 1) + ".  拍照片并裁剪");
+        if(!AndPermission.hasPermission(MainActivity.this
+                , Manifest.permission.CAMERA
+                , Manifest.permission.READ_PHONE_STATE
+                , Manifest.permission.RECORD_AUDIO)) {
+            AndPermission.with(MainActivity.this)
+                    .requestCode(100)
+                    .permission(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO,Manifest.permission.READ_PHONE_STATE)
+                    .rationale(new RationaleListener() {
+                        @Override
+                        public void showRequestPermissionRationale(int requestCode, Rationale rationale) {
+                            AndPermission.rationaleDialog(MainActivity.this, rationale).show();
+                        }
+                    })
+                    .send();
+        }
         ListView listView = (ListView) findViewById(R.id.ls_home);
 
         listView.setAdapter(new MyAdapter(this));
@@ -58,21 +73,6 @@ public class MainActivity extends AppCompatActivity implements PermissionListene
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(!AndPermission.hasPermission(MainActivity.this
-                        , Manifest.permission.CAMERA
-                        , Manifest.permission.READ_PHONE_STATE
-                        , Manifest.permission.RECORD_AUDIO)) {
-                    AndPermission.with(MainActivity.this)
-                            .requestCode(100)
-                            .permission(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO,Manifest.permission.READ_PHONE_STATE)
-                            .rationale(new RationaleListener() {
-                                @Override
-                                public void showRequestPermissionRationale(int requestCode, Rationale rationale) {
-                                    AndPermission.rationaleDialog(MainActivity.this, rationale).show();
-                                }
-                            })
-                             .send();
-                }
                 switch (position) {
                     case 0: /*** 选择单张图片 onActivityResult{@link GalleryActivity.PHOTOS}*/
                         GalleryHelper.with(MainActivity.this).type(GalleryConfig.SELECT_PHOTO).requestCode(12).singlePhoto().execute();
@@ -181,11 +181,12 @@ public class MainActivity extends AppCompatActivity implements PermissionListene
 
     @Override
     public void onFailed(int requestCode, List<String> deniedPermissions) {
-        Toast.makeText(this, "权限获取失败", Toast.LENGTH_SHORT).show();
+
         // 用户否勾选了不再提示并且拒绝了权限，那么提示用户到设置中授权。
         if (!AndPermission.hasAlwaysDeniedPermission(this, deniedPermissions)) {
             // 第一种：用默认的提示语。
             AndPermission.defaultSettingDialog(this, 300).show();
+            Toast.makeText(this, "权限获取失败", Toast.LENGTH_SHORT).show();
         }
     }
 
