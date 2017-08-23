@@ -16,14 +16,16 @@ import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.os.Build;
+import android.util.Log;
 import android.view.OrientationEventListener;
 import android.view.Surface;
 import android.view.WindowManager;
 
-
+import com.dhc.gallery.utils.AndroidUtilities;
 import com.dhc.gallery.utils.Gallery;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CameraSession {
 
@@ -209,8 +211,12 @@ public class CameraSession {
                 camera.setDisplayOrientation(currentOrientation = cameraDisplayOrientation);
 
                 if (params != null) {
-                    params.setPreviewSize(previewSize.getWidth(), previewSize.getHeight());
-                    params.setPictureSize(pictureSize.getWidth(), pictureSize.getHeight());
+                    Log.d("dd",previewSize.getWidth()+"  "+previewSize.getHeight()+"previewSize");
+                    Log.d("dd",pictureSize.getWidth()+"  "+pictureSize.getHeight()+"pictureSize");
+//                    params.setPreviewSize(previewSize.getWidth(), previewSize.getHeight());
+//                    params.setPictureSize(pictureSize.getWidth(), pictureSize.getHeight());
+                    setPreviewSize(params);
+                    setPictureSize(params);
                     params.setPictureFormat(pictureFormat);
 
                     String desiredMode = Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE;
@@ -252,6 +258,99 @@ public class CameraSession {
 //            FileLog.e(e);
         }
     }
+    public  void setPreviewSize(Camera.Parameters parametes) {
+        List<Camera.Size> localSizes = parametes.getSupportedPreviewSizes();
+        Camera.Size biggestSize = null;
+        Camera.Size fitSize = null;// 优先选屏幕分辨率
+        Camera.Size targetSize = null;// 没有屏幕分辨率就取跟屏幕分辨率相近(大)的size
+        Camera.Size targetSiz2 = null;// 没有屏幕分辨率就取跟屏幕分辨率相近(小)的size
+        if (localSizes != null) {
+            int cameraSizeLength = localSizes.size();
+            for (int n = 0; n < cameraSizeLength; n++) {
+                Camera.Size size = localSizes.get(n);
+                if (biggestSize == null ||
+                        (size.width >= biggestSize.width && size.height >= biggestSize.height)) {
+                    biggestSize = size;
+                }
+
+                if (size.width == AndroidUtilities.displaySize.y
+                        && size.height == AndroidUtilities.displaySize.x) {
+                    fitSize = size;
+                } else if (size.width == AndroidUtilities.displaySize.y
+                        || size.height == AndroidUtilities.displaySize.x) {
+                    if (targetSize == null) {
+                        targetSize = size;
+                    } else if (size.width < AndroidUtilities.displaySize.y
+                            || size.height < AndroidUtilities.displaySize.x) {
+                        targetSiz2 = size;
+                    }
+                }
+            }
+
+            if (fitSize == null) {
+                fitSize = targetSize;
+            }
+
+            if (fitSize == null) {
+                fitSize = targetSiz2;
+            }
+
+            if (fitSize == null) {
+                fitSize = biggestSize;
+            }
+
+            Log.d("dd", fitSize.width + "  " + fitSize.height + "pictureSize");
+
+            parametes.setPreviewSize(fitSize.width, fitSize.height);
+        }
+    }
+
+    /** 输出的照片为最高像素 */
+    public  void setPictureSize(Camera.Parameters parametes) {
+        List<Camera.Size> localSizes = parametes.getSupportedPictureSizes();
+        Camera.Size biggestSize = null;
+        Camera.Size fitSize = null;// 优先选预览界面的尺寸
+        Camera.Size previewSize = parametes.getPreviewSize();
+
+        float previewSizeScale = 0;
+        if (previewSize != null) {
+            previewSizeScale = previewSize.width / (float) previewSize.height;
+        }
+
+        if (localSizes != null) {
+            int cameraSizeLength = localSizes.size();
+            for (int n = 0; n < cameraSizeLength; n++) {
+                Camera.Size size = localSizes.get(n);
+                if (biggestSize == null) {
+                    biggestSize = size;
+                } else if (size.width >= biggestSize.width && size.height >= biggestSize.height) {
+                    biggestSize = size;
+                }
+
+                // 选出与预览界面等比的最高分辨率
+                if (previewSizeScale > 0
+                        && size.width >= previewSize.width && size.height >= previewSize.height) {
+                    float sizeScale = size.width / (float) size.height;
+                    if (sizeScale == previewSizeScale) {
+                        if (fitSize == null) {
+                            fitSize = size;
+                        } else if (size.width >= fitSize.width && size.height >= fitSize.height) {
+                            fitSize = size;
+                        }
+                    }
+                }
+            }
+
+            // 如果没有选出fitSize, 那么最大的Size就是FitSize
+            if (fitSize == null) {
+                fitSize = biggestSize;
+            }
+            Log.d("dd",fitSize.width+"  "+fitSize.height);
+            parametes.setPictureSize(fitSize.width, fitSize.height);
+        }
+    }
+
+
 
     protected void focusToRect(Rect focusRect, Rect meteringRect) {
         try {

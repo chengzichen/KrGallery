@@ -111,7 +111,6 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
         }
         if (cameraOpened) {
             closeCamera(true);
-            return;
         }
         hideCamera(true);
         if (cameraView != null) {
@@ -764,4 +763,5 @@ public class CameraActivity extends BaseFragment implements NotificationCenter.N
     public void setDelegate(CameraActivityDelegate cameraActivityDelegate) {
         delegate = cameraActivityDelegate;
     }
+
 }
