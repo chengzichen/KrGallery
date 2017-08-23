@@ -213,10 +213,10 @@ public class CameraSession {
                 if (params != null) {
                     Log.d("dd",previewSize.getWidth()+"  "+previewSize.getHeight()+"previewSize");
                     Log.d("dd",pictureSize.getWidth()+"  "+pictureSize.getHeight()+"pictureSize");
-//                    params.setPreviewSize(previewSize.getWidth(), previewSize.getHeight());
-//                    params.setPictureSize(pictureSize.getWidth(), pictureSize.getHeight());
-                    setPreviewSize(params);
-                    setPictureSize(params);
+                    params.setPreviewSize(previewSize.getWidth(), previewSize.getHeight());
+                    params.setPictureSize(pictureSize.getWidth(), pictureSize.getHeight());
+//                    setPreviewSize(params);
+//                    setPictureSize(params);
                     params.setPictureFormat(pictureFormat);
 
                     String desiredMode = Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE;

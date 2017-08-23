@@ -107,7 +107,7 @@ public class CameraController implements MediaRecorder.OnInfoListener {
                             list = params.getSupportedPictureSizes();
                             for (int a = 0; a < list.size(); a++) {
                                 Camera.Size size = list.get(a);
-                                if (!"samsung".equals(Build.MANUFACTURER) || !"jflteuc".equals(Build.PRODUCT) || size.width < 2048) {
+                                if (!"samsung".equals(Build.MANUFACTURER) || !"jflteuc".equals(Build.PRODUCT)||"Meizu".equals(android.os.Build.BRAND) || size.width < 2048) {
                                     cameraInfo.pictureSizes.add(new Size(size.width, size.height));
                                 }
                             }
