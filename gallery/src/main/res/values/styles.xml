@@ -47,8 +47,8 @@
 
     <!-- dialog底部弹出菜单动画 -->
     <style name="bottom_menu_animation" parent="android:Animation">
-        <item name="@android:windowEnterAnimation">@anim/bottom_menu_enter</item>
-        <item name="@android:windowExitAnimation">@anim/bottom_menu_exit</item>
+        <item name="android:windowEnterAnimation">@anim/bottom_menu_enter</item>
+        <item name="android:windowExitAnimation">@anim/bottom_menu_exit</item>
     </style>
 
 

@@ -78,7 +78,7 @@ KrGallery摘取于[Telegram](https://github.com/DrKLO/Telegram "https://github.c
 
 
 	dependencies {
-		      compile 'com.dhc.krgallery:gallerylib:1.0.2'
+		      compile 'com.dhc.krgallery:gallerylib:1.0.3'
 		}
 
 
